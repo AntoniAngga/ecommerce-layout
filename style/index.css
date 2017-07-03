@@ -1,0 +1,30 @@
+body{
+  background-color: #fff;
+}
+
+#icon, nav .nav-wrapper i {
+  height: 25px;
+  line-height: 25px;
+}
+
+#First_Selogan{
+  margin-top: 200px;
+}
+
+#nav_social{
+    height: 35px;
+    line-height: 35px;
+    background-color: black;
+}
+
+#nav_item{
+  background-color: #fff;
+}
+
+#logo{
+  padding-left: 17px;
+}
+
+#nav_item a{
+  color: black;
+}
