@@ -20,7 +20,6 @@ let customerAdd = function(req,res){
     phone : data.phone,
     alamat : data.alamat
   });
-  
   newCustomer.save(function(err) {
     if(err){
       res.status(504).send(`Something Wrong wiht your insert`);

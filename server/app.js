@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/ecommerce');
 
 var index = require('./routes/index');
+var customers = require('./routes/customers');
 
 var app = express();
 
@@ -32,6 +33,7 @@ db.once('open', function() {
 });
 
 app.use('/', index);
+app.use('/api/customer', customers);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
