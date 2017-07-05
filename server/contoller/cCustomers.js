@@ -27,6 +27,7 @@ let customerAdd = function(req,res){
       res.send("1 Document Inseted")
     }
   })
+  console.log(data);
 }
 
 module.exports = {

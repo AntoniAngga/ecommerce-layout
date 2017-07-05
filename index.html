@@ -23,7 +23,7 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="">Login</a></li>
           <li>or</li>
-          <li><a href="./CreateAccount.html">Create Account</a></li>
+          <li><a href="./createaccount.html">Create Account</a></li>
           <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
           <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
         </ul>
@@ -110,14 +110,17 @@
         </div>
       </div>
     </div>
-    
+  </div>
     <script type="text/javascript">
       $(document).ready(function(){
-        $('.carousel').carousel();
-        $('.carousel.carousel-slider').carousel({fullWidth:true});
-        $(".dropdown-button").dropdown();
-        $('.slider').slider();
-      })
+      $('.carousel').carousel();
+      $('.carousel.carousel-slider').carousel({fullWidth:true});
+      $(".dropdown-button").dropdown();
+      $('.slider').slider();
+    })
+    </script>
+    
+    <script type="text/javascript">
       var app = new Vue({
       el: '#app',
       created : function(){

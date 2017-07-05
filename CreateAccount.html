@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./style/index.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <nav id="nav_social">
@@ -38,59 +39,127 @@
       </div>
     </nav>
     
-    <div class="container">
-      <h4>Register From</h4>
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="col s5">
-              <p>ini tempat tarok photo</p>
-            </div>
-            <div class="input-field col s7">
-              <input placeholder="Your Name" id="txt_name" type="text" class="validate">
-              <label for="first_name">Name</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s5"></div>
-            <div class="input-field col s7">
-              <div class="input-field col s12">
-                <input id="email" type="email" placeholder ="Your Email" class="validate">
-                <label for="email">Email</label>
+    <div id="app">
+      <div class="container">
+        <h4>Register From</h4>
+        <hr>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="col s5">
+                <img src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png" alt="" style="border-radius: 10px; height: 220px; width: auto; margin-top: 10px; margin-left : 50px">
+              </div>
+              <div class="input-field col s7">
+                <input v-model = "name" placeholder="Your Name" id="txt_name" type="text" class="validate">
+                <label for="first_name">Name</label>
+              </div>
+              <div class="input-field col s7">
+                <div class="input-field col s12">
+                  <input id="email" v-model = "email" type="email" placeholder ="Your Email" class="validate">
+                  <label for="email">Email</label>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col s5">
-              <label for="birthdate1">Birthdate</label>
-              <input id = "bitrthdate1" type="date" placeholder="Your Birthday"class="datepicker">            
-            </div>
-            <div class="col s2">
+            <div class="row">
+              <div class="col s5"></div>
               
             </div>
-            <div class="col s5">
-              <label for="phone">Phone</label>
-              <input type="text" name="phone" placeholder = "your phone number" id="phone">
+            <div class="row">
+              <div class="col s5">
+                <label for="tanggal">Birthdate</label>
+                <input type="date" v-model="birthdate" id="tanggal" class="tanggal">
+              </div>
+              <div class="col s2">
+                
+              </div>
+              <div class="col s5">
+                <label for="phone">Phone</label>
+                <input type="text" name="phone" v-model="phone" placeholder = "your phone number" id="phone">
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col s5">
-              <textarea id="alamat" class="materialize-textarea"></textarea>
-              <label for="alamat">Alamat</label>
+            <div class="row">
+              <div class="col s5">
+                <label for="alamat">Alamat</label>
+                <textarea id="alamat" v-model="alamat" class="materialize-textarea"></textarea>
+              </div>
+              <div class="col s2">
+                
+              </div>
+              <div class="col s5">
+                <label>Gender</label>
+                <p>
+                  <input name="group1" v-model="gender" value="male" type="radio" id="test1" />
+                  <label for="test1">Male</label>
+                </p>
+                <p>
+                  <input name="group1" v-model="gender" value="female" type="radio" id="test2" />
+                  <label for="test2">Female</label>
+                </p>
+              </div>
             </div>
-          </div>
-        </form>
+            <br>
+            <h5>Login Username</h5>
+            <hr>
+            <div class="row">
+              <div class="col s5">
+                <label for="Username">Username</label>
+                <input type="text" name="Userame" v-model="username" placeholder="input your username">
+              </div>
+              <div class="col s2">
+                
+              </div>
+              <div class="col s5">
+                <label for="Password">Password</label>
+                <input type="password" name="Password" v-model="password" placeholder="input your password">
+              </div>
+            </div>
+            <div class="row">
+              <a class="waves-effect waves-light btn" v-on:click="post_customer">button</a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     
     <script type="text/javascript">
-      $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 50 // Creates a dropdown of 15 years to control year
-      });
+    $('#alamat').val('');
+    $('#alamat').trigger('autoresize');
+    </script>
+    <script type="text/javascript">
       
-      $('#alamat').val('');
-      $('#alamat').trigger('autoresize');
+      var app = new Vue ({
+        el : "#app",
+        data : {
+          name : '',
+          username : '',
+          password : '',
+          gender : '',
+          alamat : '',
+          phone : '',
+          birthdate : '',
+          email : ''
+        },
+        methods: {
+          post_customer : function(){
+            this_app = this;
+            axios.post('http://localhost:3000/api/customer',{
+              name : this_app.name,
+              username : this_app.username,
+              password : this_app.password,
+              gender : this_app.gender,
+              alamat : this_app.alamat,
+              phone : this_app.phone,
+              birthdate : this_app.birthdate,
+              email : this_app.email
+              
+            }).then(function(res) {
+              console.log(res.data)
+            }).catch(err => {
+              console.log(err);
+            })
+          }
+        }
+      })
     </script>      
   </body>
 </html>
